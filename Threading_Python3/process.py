@@ -12,12 +12,12 @@ current_thread().setName("Sample thread")
 print(current_thread().getName())
 
 def cube(num,value=3):
-    for i in range(1):
+    for i in range(8):
         # get the process id 
         print("Square Process id  1 : {}".format(os.getpid()))
         print("Cube : {} ".format(num**value))
 def square(num):
-    for i in range(1):
+    for i in range(8):
         print("Square Process id 2 : {}".format(os.getpid()))
         print("Square : {} ".format(num**2))
     
@@ -30,5 +30,5 @@ t2.start()
 
 # it will wait untill the thread reached ends 
 t1.join()
-t2.join()
+# t2.join()
 print("Done ")

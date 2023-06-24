@@ -1,42 +1,21 @@
-
 from subprocess import PIPE , STDOUT , Popen
 from threading import *
+
+class process_thread(Thread):
+    def __init__(self,proc ):
+        Thread.__init__(self)
+        self.proc = proc
+    def run(self):
+        while not self.proc.stdout.closed:
+            print(self.proc.stdout.readline().decode())
+
 
 # linux bc command with arguments 
 p = Popen(['bc','-q','-i'],stdout=PIPE,stdin=PIPE,stderr=STDOUT,shell=True)
 # remaining information of commads using bc 
+out=process_thread(p)
+out.start()
 
-# this wil read the output of bc command at first 4 line    use bc command    dont use bc -q -i 
-# print(p.stdout.readline().strip())
-# print(p.stdout.readline().strip())
-# print(p.stdout.readline().strip())
-# print(p.stdout.readline().strip())
-# print(p.stdout.readline().strip())
-
-#  communicate is used to  pass the input via stdin in bc  
-# result = p.communicate('1+2\n'.encode())
-# print("Result type : "+ str(type(result)))
-# print(result[0].rstrip())
-
-
-
-
-"""
-print("Process ID : "+str(p.pid))
-while True:
-        # each and every time it will create new process id 
-        # p = Popen(['bc','-q','-i'],stdout=PIPE,stdin=PIPE,stderr=STDOUT,shell=True)
-        print("Process ID : "+str(p.pid))
-        query=input(" > ")
-        if query.strip()=="quit"or query.strip()=="exit":
-            print("Closed .....")
-            break
-        else:
-            query=query+"\n"
-            result=p.communicate(query.encode(),timeout=1)
-            print(result[0].rstrip())
-          """
-"""             
 while not p.stdout.closed:
     print("Process id : "+str(p.pid))
     query=input(' > ')
@@ -58,16 +37,7 @@ while not p.stdout.closed:
     #  we read the input pass via bc command  and send out in stdout         in top 5-10 lines you analyse that 
     # we  get the output via stdout in bc via python subprocess 
     # we wont put decode we get a binary fromat output   example : 5+6  =>  b'11'
-    print(p.stdout.readline().decode().rstrip())
-"""
-
-
-# we use subprocess to directly connunicate the stdin , stdout , stderr  to pass an input and output 
-
-
-
-# if you a input a a=10   it will not go to next line they wait for a input  so we go to threading concept   
-
+    # print(p.stdout.readline().decode().rstrip())
 
 
 

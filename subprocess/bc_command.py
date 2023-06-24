@@ -50,7 +50,8 @@ while not p.stdout.closed:
     # we write a input to stdin in bc   by using  python subprocess 
     p.stdin.write(query.encode())
 
-    # what ever we are write and read in stdin and stdout we need to flush that
+    # what ever we are write and read in stdin and stdout we need to flush that   
+    # flush will push the data from another side
     p.stdin.flush()
     #  we read the input pass via bc command  and send out in stdout         in top 5-10 lines you analyse that 
     # we  get the output via stdout in bc via python subprocess 
